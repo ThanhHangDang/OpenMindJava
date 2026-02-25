@@ -1,0 +1,18 @@
+.product-card {
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.carousel-item {
+  padding: 20px 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}

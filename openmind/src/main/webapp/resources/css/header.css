@@ -1,0 +1,13 @@
+#mobileMenu {
+    display: none;
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+@media (min-width: 768px) {
+    #mobileMenu {
+    display: none !important;
+    }
+}
+.nav-link {
+    padding: 0.5rem 1rem;
+}
