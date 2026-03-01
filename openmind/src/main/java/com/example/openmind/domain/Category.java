@@ -1,18 +1,27 @@
 package com.example.openmind.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String categoryName;
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

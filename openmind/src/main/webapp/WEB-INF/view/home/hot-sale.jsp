@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         <!DOCTYPE html>
         <html lang="en">
@@ -25,12 +26,12 @@
         </head>
 
         <body>
-            <h2 class="text-center my-4">Sản phẩm hot</h2>
+            <h2 class="text-center my-4">Khoá học mới nhất</h2>
             <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
 
                     <!-- Slide 1 -->
-                    <div class="carousel-item active">
+                    <!-- <div class="carousel-item active">
                         <div class="container">
                             <div class="row g-4">
 
@@ -69,10 +70,10 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Slide 2 -->
-                    <div class="carousel-item">
+                    <!-- <div class="carousel-item">
                         <div class="container">
                             <div class="row g-4">
 
@@ -86,8 +87,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- thêm card tương tự -->
 
                                 <div class="col-md-4">
                                     <div class="card product-card">
@@ -113,7 +112,77 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <!-- <c:forEach var="product" items="${latestProducts}">
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="row g-4">
+
+                                    <div class="col-md-4">
+                                        <div class="card product-card">
+                                            <img src="${product.imageUrl}" class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${product.productName}</h5>
+                                                <p class="card-text">Mô tả ngắn sản phẩm</p>
+                                                <p class="fw-bold text-danger">${product.price}đ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach> -->
+
+                    <c:forEach var="product" items="${latestProducts}" varStatus="status">
+
+                        <!-- Mở slide mới mỗi 3 sản phẩm -->
+                        <c:if test="${status.index % 3 == 0}">
+                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                <div class="container">
+                                    <div class="row g-4">
+                        </c:if>
+
+                                        <div class="col-md-4">
+                                            <div class="card product-card p-2">
+                                                <div class="row g-2 align-items-center">
+
+                                                    <!-- Ảnh bên trái -->
+                                                    <div class="col-4">
+                                                        <img src="${product.imageUrl}" 
+                                                            class="img-fluid rounded"
+                                                            style="height: 100px; object-fit: cover;">
+                                                    </div>
+
+                                                    <!-- Nội dung bên phải -->
+                                                    <div class="col-8">
+                                                        <h6 class="mb-1">${product.productName}</h6>
+                                                        <!-- <p class="mb-1 text-muted small">${product.description}</p> -->
+                                                         <span class="fw-bold text-danger mb-0 mr-1">
+                                                            <fmt:formatNumber 
+                                                                value="${product.price}" 
+                                                                maxFractionDigits="0" 
+                                                            /> VNĐ
+                                                         </span>
+                                                        <c:if test="${product.discount > 0}">
+                                                            <span class="text-muted text-decoration-line-through mr-1">${product.price} VNĐ</span>
+                                                            <span class="badge bg-danger ms-2">${product.discount}% OFF</span>
+                                                        </c:if>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                        <!-- Đóng slide sau mỗi 3 sản phẩm hoặc phần tử cuối -->
+                        <c:if test="${status.index % 3 == 2 || status.last}">
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+
+                    </c:forEach>
 
                 </div>
 

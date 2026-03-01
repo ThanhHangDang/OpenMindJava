@@ -28,13 +28,13 @@
       <div class="col-md-4 mb-3">
         <h5>Liên kết nhanh</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-white">Cửa Hàng</a></li>
-          <li><a href="#" class="text-decoration-none text-white">Giỏ Hàng</a></li>
-          <li><a href="#" class="text-decoration-none text-white">feedBack</a></li>
+          <li><a href="/" class="text-decoration-none text-white">Cửa Hàng</a></li>
+          <li><a href="/cart" class="text-decoration-none text-white">Giỏ Hàng</a></li>
+          <li><a href="#" class="text-decoration-none text-white">FeedBack</a></li>
         </ul>
       </div>
       <div class="col-md-4 mb-3">
-        <h5>Theo dõ chúng tôi</h5>
+        <h5>Theo dõi chúng tôi</h5>
         <ul class="list-inline social-icons">
           <li class="list-inline-item"><a href="#" class="text-white"><i class="bi bi-facebook"></i></a></li>
           <li class="list-inline-item"><a href="#" class="text-white"><i class="bi bi-twitter"></i></a></li>

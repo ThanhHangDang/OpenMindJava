@@ -18,7 +18,7 @@
     
 </head>
 <body>
-    <header class="bg-light shadow-sm py-2">
+    <header id="header-css" class="bg-light shadow-sm py-2 sticky-top">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
 
@@ -31,9 +31,9 @@
             <!-- Desktop Navigation -->
             <nav class="d-none d-md-flex">
                 <a href="/" class="nav-link text-dark">Cửa Hàng</a>
-                <a href="cart" class="nav-link text-dark">Giỏ Hàng</a>
+                <a href="/cart" class="nav-link text-dark">Giỏ Hàng</a>
                 <a href="#" class="nav-link text-dark">Thanh Toán</a>
-                <a href="product-detail" class="nav-link text-dark">FeedBack</a>
+                <a href="/feedback" class="nav-link text-dark">FeedBack</a>
             </nav>
 
             <!-- Right Section -->
@@ -53,19 +53,20 @@
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="d-md-none mt-2">
             <nav class="mb-3 d-flex flex-column align-items-center">
-                <a href="#" class="nav-link text-dark">Cửa Hàng</a>
-                <a href="#" class="nav-link text-dark">Giỏ Hàng</a>
+                <a href="/" class="nav-link text-dark">Cửa Hàng</a>
+                <a href="/cart" class="nav-link text-dark">Giỏ Hàng</a>
                 <a href="#" class="nav-link text-dark">Thanh Toán</a>
-                <a href="#" class="nav-link text-dark">FeedBack</a>
+                <a href="/feedback" class="nav-link text-dark">FeedBack</a>
             </nav>
-            <div class="mb-3">
-                <a href="#" class="btn w-100 mb-2">
+            <!-- <div class="mb-3">
+                <a href="/cart" class="btn w-100 mb-2">
                 <i class="bi bi-cart-fill"></i>
                 </a>
-            </div>
+            </div> -->
             </div>
         </div>
     </header>
+    
 
     <script src="<c:url value='/resources/js/header.js'/>"></script>
 </body>

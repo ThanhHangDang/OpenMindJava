@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +21,10 @@
 </head>
 <body>
     <div class="container py-5">
-        <h2 class="text-center mb-5">Tất cả sản phẩm</h2>
+        <h2 class="text-center mb-5">Tất cả khoá học</h2>
         <!-- Top Bar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="mb-0">Product Collection</h4>
+            <h4 class="mb-0">Danh sách khoá học</h4>
             <div class="d-flex gap-2 align-items-center">
                 <span class="text-muted">Sort by:</span>
                 <button class="sort-btn">
@@ -36,37 +38,36 @@
             <div class="col-lg-3">
                 <div class="filter-sidebar p-4 shadow-sm">
                     <div class="filter-group">
-                        <h6 class="mb-3">Categories</h6>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="electronics">
-                            <label class="form-check-label" for="electronics">
-                                Electronics
-                            </label>
+                        <h6 class="mb-3">Tìm kiếm</h6>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm khoá học...">
                         </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="clothing">
-                            <label class="form-check-label" for="clothing">
-                                Clothing
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="accessories">
-                            <label class="form-check-label" for="accessories">
-                                Accessories
-                            </label>
-                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h6 class="mb-3">Danh mục</h6>
+                        <c:forEach var="category" items="${categories}">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="category${category.id}">
+                                <label class="form-check-label" for="category${category.id}">
+                                    ${category.categoryName} 
+                                </label>
+                            </div>
+                        </c:forEach>
                     </div>
 
                     <div class="filter-group">
                         <h6 class="mb-3">Price Range</h6>
-                        <input type="range" class="form-range" min="0" max="1000" value="500">
+                        <input type="range" class="form-range" min="0" max="2000000" id="priceRange" value="500000">
                         <div class="d-flex justify-content-between">
-                            <span class="text-muted">$0</span>
-                            <span class="text-muted">$1000</span>
+                            <span class="text-muted">0 VNĐ</span>
+                            <span class="fw-bold text-primary" id="priceValue">
+                                500.000 VNĐ
+                            </span>
+                            <span class="text-muted">3tr VNĐ</span>
                         </div>
                     </div>
 
-                    <div class="filter-group">
+                    <!-- <div class="filter-group">
                         <h6 class="mb-3">Colors</h6>
                         <div class="d-flex gap-2">
                             <div class="color-option selected" style="background: #000000;"></div>
@@ -90,7 +91,7 @@
                                 <i class="bi bi-star-fill text-warning"></i> 3 & above
                             </label>
                         </div>
-                    </div>
+                    </div> -->
 
                     <button class="btn btn-outline-primary w-100">Apply Filters</button>
                 </div>
@@ -99,104 +100,87 @@
             <!-- Product Grid -->
             <div class="col-lg-9">
                 <div class="row g-4">
-                    <!-- Product Card 1 -->
-                    <div class="col-md-4">
-                        <div class="product-card shadow-sm">
-                            <div class="position-relative">
-                                <img src="https://via.placeholder.com/300x200" class="product-image w-100" alt="Product">
-                                <span class="discount-badge">-20%</span>
-                                <button class="wishlist-btn">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-                            </div>
-                            <div class="p-3">
-                                <span class="category-badge mb-2 d-inline-block">Electronics</span>
-                                <h6 class="mb-1">Wireless Headphones</h6>
-                                <div class="rating-stars mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i>
-                                    <span class="text-muted ms-2">(4.5)</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="price">$129.99</span>
-                                    <button class="btn cart-btn">
-                                        <i class="bi bi-cart-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="col-md-4">
-                        <div class="product-card shadow-sm">
-                            <div class="position-relative">
-                                <img src="https://via.placeholder.com/300x200" class="product-image w-100" alt="Product">
-                                <button class="wishlist-btn">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-                            </div>
-                            <div class="p-3">
-                                <span class="category-badge mb-2 d-inline-block">Electronics</span>
-                                <h6 class="mb-1">Smart Watch Pro</h6>
-                                <div class="rating-stars mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <span class="text-muted ms-2">(4.0)</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="price">$299.99</span>
-                                    <button class="btn cart-btn">
-                                        <i class="bi bi-cart-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="col-md-4">
-                        <div class="product-card shadow-sm">
-                            <div class="position-relative">
-                                <img src="https://via.placeholder.com/300x200" class="product-image w-100" alt="Product">
-                                <span class="discount-badge">-15%</span>
-                                <button class="wishlist-btn">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-                            </div>
-                            <div class="p-3">
-                                <span class="category-badge mb-2 d-inline-block">Accessories</span>
-                                <h6 class="mb-1">Leather Wallet</h6>
-                                <div class="rating-stars mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <span class="text-muted ms-2">(5.0)</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="price">$59.99</span>
-                                    <button class="btn cart-btn">
-                                        <i class="bi bi-cart-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- More product cards can be added here -->
-
+                    <c:forEach var="product" items="${products}">
+                        <div class="col-md-4">
+                            <div class="product-card shadow-sm">
+                                <div class="position-relative">
+                                    <a href="product-detail/${product.id}">
+                                    <img src="${product.imageUrl}" class="product-image w-100" alt="Product">
+                                    </a>
+                                    <c:if test="${product.discount > 0}">
+                                        <span class="discount-badge">-${product.discount}%</span>
+                                    </c:if>
+                                    <button class="wishlist-btn">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="p-3">
+                                    <span class="category-badge mb-2 d-inline-block">${product.category.categoryName}</span>
+                                    <a href="product-detail/${product.id}" class="text-decoration-none text-dark">
+                                    <h6 class="mb-1">
+                                        ${product.productName}
+                                    </h6>
+                                    </a>
+                                    <!-- <div class="rating-stars mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span class="text-muted ms-2">(4.5)</span>
+                                    </div> -->
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <c:if test="${product.discount > 0}">
+                                                <span class="text-muted text-decoration-line-through">
+                                                    <fmt:formatNumber 
+                                                        value="${product.price}" 
+                                                        maxFractionDigits="0" 
+                                                    /> VNĐ
+                                                </span>
+                                            </c:if>
+                                            <span class="price">
+                                                <fmt:formatNumber 
+                                                    value="${product.price - (product.price * product.discount / 100)}" 
+                                                    maxFractionDigits="0" 
+                                                /> VNĐ
+                                            </span>
+                                        </div>
+                                        
+                                        <button class="btn cart-btn">
+                                            <i class="bi bi-cart-plus"></i> Giỏ hàng
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
+
+                <!-- pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-floating justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
+
+    <script src="<c:url value='/resources/js/all-product.js'/>"></script>
 </body>
 </html>
 

@@ -11,3 +11,13 @@
 .nav-link {
     padding: 0.5rem 1rem;
 }
+
+.nav-link:hover {
+    background-color: #e2e6ea;
+    border-radius: 8px;
+}
+
+#header-css {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+}
