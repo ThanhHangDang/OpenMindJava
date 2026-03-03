@@ -36,69 +36,99 @@
         <div class="row g-4">
             <!-- Filters Sidebar -->
             <div class="col-lg-3">
-                <div class="filter-sidebar p-4 shadow-sm">
-                    <div class="filter-group">
-                        <h6 class="mb-3">Tìm kiếm</h6>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm khoá học...">
+                <form method="get" action="/">
+                    <div class="filter-sidebar p-4 shadow-sm">
+                        <div class="filter-group">
+                            <h6 class="mb-3">Tìm kiếm</h6>
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    name="keyWord"
+                                    value="${param.keyWord}"
+                                    placeholder="Tìm kiếm khoá học..."
+                                >
+                            </div>
                         </div>
-                    </div>
-                    <div class="filter-group">
-                        <h6 class="mb-3">Danh mục</h6>
-                        <c:forEach var="category" items="${categories}">
+                        <div class="filter-group">
+                            <h6 class="mb-3">Danh mục</h6>
+                            <c:forEach var="category" items="${categories}">
+                                <div class="form-check mb-2">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        id="category${category.id}" 
+                                        name="categoryId"
+                                        value="${category.id}"
+                                        <c:if test="${param.categoryId != null && param.categoryId == category.id}">
+                                            checked
+                                        </c:if>
+                                    >
+                                    <label class="form-check-label" for="category${category.id}">
+                                        ${category.categoryName} 
+                                    </label>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6 class="mb-3">Price Range</h6>
+                            <input 
+                                type="range"
+                                class="form-range"
+                                min="0"
+                                max="3000000"
+                                id="priceRange"
+                                name="maxPrice"
+                                value="${param.maxPrice != null ? param.maxPrice : 3000000}"
+                            >
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">0 VNĐ</span>
+                                <span class="fw-bold text-primary" id="priceValue">
+                                    500.000 VNĐ
+                                </span>
+                                <span class="text-muted">3tr VNĐ</span>
+                            </div>
+                        </div>
+
+                        <!-- <div class="filter-group">
+                            <h6 class="mb-3">Colors</h6>
+                            <div class="d-flex gap-2">
+                                <div class="color-option selected" style="background: #000000;"></div>
+                                <div class="color-option" style="background: #dc2626;"></div>
+                                <div class="color-option" style="background: #2563eb;"></div>
+                                <div class="color-option" style="background: #16a34a;"></div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h6 class="mb-3">Rating</h6>
                             <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="category${category.id}">
-                                <label class="form-check-label" for="category${category.id}">
-                                    ${category.categoryName} 
+                                <input class="form-check-input" type="radio" name="rating" id="rating4">
+                                <label class="form-check-label" for="rating4">
+                                    <i class="bi bi-star-fill text-warning"></i> 4 & above
                                 </label>
                             </div>
-                        </c:forEach>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="rating" id="rating3">
+                                <label class="form-check-label" for="rating3">
+                                    <i class="bi bi-star-fill text-warning"></i> 3 & above
+                                </label>
+                            </div>
+                        </div> -->
+
+                        <button type="submit" class="btn btn-outline-primary w-100">Apply Filters</button>
                     </div>
-
-                    <div class="filter-group">
-                        <h6 class="mb-3">Price Range</h6>
-                        <input type="range" class="form-range" min="0" max="2000000" id="priceRange" value="500000">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">0 VNĐ</span>
-                            <span class="fw-bold text-primary" id="priceValue">
-                                500.000 VNĐ
-                            </span>
-                            <span class="text-muted">3tr VNĐ</span>
-                        </div>
-                    </div>
-
-                    <!-- <div class="filter-group">
-                        <h6 class="mb-3">Colors</h6>
-                        <div class="d-flex gap-2">
-                            <div class="color-option selected" style="background: #000000;"></div>
-                            <div class="color-option" style="background: #dc2626;"></div>
-                            <div class="color-option" style="background: #2563eb;"></div>
-                            <div class="color-option" style="background: #16a34a;"></div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h6 class="mb-3">Rating</h6>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="rating" id="rating4">
-                            <label class="form-check-label" for="rating4">
-                                <i class="bi bi-star-fill text-warning"></i> 4 & above
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="rating" id="rating3">
-                            <label class="form-check-label" for="rating3">
-                                <i class="bi bi-star-fill text-warning"></i> 3 & above
-                            </label>
-                        </div>
-                    </div> -->
-
-                    <button class="btn btn-outline-primary w-100">Apply Filters</button>
-                </div>
+                </form>
             </div>
 
             <!-- Product Grid -->
             <div class="col-lg-9">
+                <c:if test="${products.size() == 0}">
+                    <div class="alert alert-info text-center" role="alert">
+                        Không tìm thấy khoá học nào phù hợp với tiêu chí của bạn.
+                    </div>
+                </c:if>
                 <div class="row g-4">
                     <!-- More product cards can be added here -->
                     <c:forEach var="product" items="${products}">
@@ -148,9 +178,12 @@
                                             </span>
                                         </div>
                                         
-                                        <button class="btn cart-btn">
+                                        <a 
+                                        type="submit"
+                                        href="add-to-cart?productId=${product.id}"
+                                        class="btn cart-btn">
                                             <i class="bi bi-cart-plus"></i> Giỏ hàng
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -159,23 +192,61 @@
                 </div>
 
                 <!-- pagination -->
-                <nav aria-label="Page navigation">
-                    <ul class="pagination pagination-floating justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">«</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">»</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <c:if test="${totalPages > 0}">
+                    <!-- pagination ở đây -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-floating justify-content-center">
+
+                            <!-- Previous -->
+                            <c:if test="${currentPage > 0}">
+                                <c:url var="prevUrl" value="/">
+                                    <c:param name="pageNumber" value="${currentPage - 1}" />
+                                    <c:param name="keyWord" value="${param.keyWord}" />
+                                    <c:param name="categoryId" value="${param.categoryId}" />
+                                    <c:param name="minPrice" value="${param.minPrice}" />
+                                    <c:param name="maxPrice" value="${param.maxPrice}" />
+                                </c:url>
+
+                                <li class="page-item">
+                                    <a class="page-link" href="${prevUrl}">«</a>
+                                </li>
+                            </c:if>
+
+                            <!-- Page Numbers -->
+                            <c:forEach begin="0" end="${totalPages - 1}" var="i">
+                                <c:url var="pageUrl" value="/">
+                                    <c:param name="pageNumber" value="${i}" />
+                                    <c:param name="keyWord" value="${param.keyWord}" />
+                                    <c:param name="categoryId" value="${param.categoryId}" />
+                                    <c:param name="minPrice" value="${param.minPrice}" />
+                                    <c:param name="maxPrice" value="${param.maxPrice}" />
+                                </c:url>
+
+                                <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                    <a class="page-link" href="${pageUrl}">
+                                        ${i + 1}
+                                    </a>
+                                </li>
+                            </c:forEach>
+
+                            <!-- Next -->
+                            <c:if test="${currentPage < totalPages - 1}">
+                                <c:url var="nextUrl" value="/">
+                                    <c:param name="pageNumber" value="${currentPage + 1}" />
+                                    <c:param name="keyWord" value="${param.keyWord}" />
+                                    <c:param name="categoryId" value="${param.categoryId}" />
+                                    <c:param name="minPrice" value="${param.minPrice}" />
+                                    <c:param name="maxPrice" value="${param.maxPrice}" />
+                                </c:url>
+
+                                <li class="page-item">
+                                    <a class="page-link" href="${nextUrl}">»</a>
+                                </li>
+                            </c:if>
+
+                        </ul>
+                    </nav>
+                </c:if>
             </div>
         </div>
     </div>

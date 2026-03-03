@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         <!DOCTYPE html>
         <html lang="en">
@@ -34,92 +35,70 @@
                         <div class="col-lg-8">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h4 class="mb-0">Shopping Cart</h4>
-                                <span class="text-muted">3 items</span>
+                                <span class="text-muted">
+                                    <c:choose>
+                                        <c:when test="${cart.size() == 0 || cart == null}">
+                                            0 items
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${cart.size()} item(s)
+                                        </c:otherwise>
+                                    </c:choose>
+                                </span>
                             </div>
 
                             <!-- Product Cards -->
                             <div class="d-flex flex-column gap-3">
-                                <!-- Product 1 -->
-                                <div class="product-card p-3 shadow-sm">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-2">
-                                            <img src="https://via.placeholder.com/100" alt="Product"
-                                                class="product-image">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <h6 class="mb-1">Wireless Headphones</h6>
-                                            <p class="text-muted mb-0">Black | Premium Series</p>
-                                            <span class="discount-badge mt-2">20% OFF</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <button class="quantity-btn" onclick="updateQuantity(1, -1)">-</button>
-                                                <input type="number" class="quantity-input" value="1" min="1">
-                                                <button class="quantity-btn" onclick="updateQuantity(1, 1)">+</button>
+                                <c:if test="${cart.size() == 0 || cart == null}">
+                                    <div class="alert alert-info text-center" role="alert">
+                                        Giỏ hàng của bạn đang trống. Hãy thêm một số khoá học để bắt đầu!
+                                    </div>
+                                </c:if>
+                                <c:forEach var="item" items="${cart}">
+                                    <div class="product-card p-3 shadow-sm">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2">
+                                                <img src="${item.imageUrl}"
+                                                    alt="Product"
+                                                    class="product-image">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h6 class="mb-1">
+                                                    ${item.productName}
+                                                </h6>
+                                                <c:if test="${item.discount > 0}">
+                                                    <span class="text-muted text-decoration-line-through me-2">
+                                                        <fmt:formatNumber 
+                                                            value="${item.price}" 
+                                                            maxFractionDigits="0" 
+                                                        /> VNĐ
+                                                    </span>
+                                                    <span class="discount-badge mt-2">${item.discount}% OFF</span>
+                                                </c:if>
+                                            </div>
+                                            <!-- <div class="col-md-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <button class="quantity-btn" onclick="updateQuantity(1, -1)">-</button>
+                                                    <input type="number" class="quantity-input" value="1" min="1">
+                                                    <button class="quantity-btn" onclick="updateQuantity(1, 1)">+</button>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-2">
+                                                <span class="fw-bold">
+                                                    <fmt:formatNumber 
+                                                        value="${item.price - (item.price * item.discount / 100)}" 
+                                                        maxFractionDigits="0" 
+                                                    /> VNĐ
+                                                </span>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a href="remove-from-cart?productId=${item.productId}" class="remove-btn">
+                                                <i class="bi bi-trash remove-btn"></i>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <span class="fw-bold">$129.99</span>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <i class="bi bi-trash remove-btn"></i>
-                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- Product 2 -->
-                                <div class="product-card p-3 shadow-sm">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-2">
-                                            <img src="https://via.placeholder.com/100" alt="Product"
-                                                class="product-image">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <h6 class="mb-1">Smart Watch</h6>
-                                            <p class="text-muted mb-0">Silver | Series 7</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <button class="quantity-btn" onclick="updateQuantity(2, -1)">-</button>
-                                                <input type="number" class="quantity-input" value="1" min="1">
-                                                <button class="quantity-btn" onclick="updateQuantity(2, 1)">+</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span class="fw-bold">$299.99</span>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <i class="bi bi-trash remove-btn"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Product 3 -->
-                                <div class="product-card p-3 shadow-sm">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-2">
-                                            <img src="https://via.placeholder.com/100" alt="Product"
-                                                class="product-image">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <h6 class="mb-1">Wireless Charger</h6>
-                                            <p class="text-muted mb-0">White | 15W Fast Charge</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <button class="quantity-btn" onclick="updateQuantity(3, -1)">-</button>
-                                                <input type="number" class="quantity-input" value="1" min="1">
-                                                <button class="quantity-btn" onclick="updateQuantity(3, 1)">+</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span class="fw-bold">$49.99</span>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <i class="bi bi-trash remove-btn"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                </c:forEach>    
                             </div>
                         </div>
 
@@ -129,21 +108,38 @@
                                 <h5 class="mb-4">Order Summary</h5>
 
                                 <div class="d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Subtotal</span>
-                                    <span>$479.97</span>
+                                    <span class="text-muted">
+                                        Tạm tính
+                                    </span>
+                                    <span>
+                                        <fmt:formatNumber 
+                                            value="${subtotal}" 
+                                            maxFractionDigits="0" 
+                                        /> VNĐ
+                                    </span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Discount</span>
-                                    <span class="text-success">-$26.00</span>
+                                    <span class="text-muted">Tổng giảm giá</span>
+                                    <span class="text-success">
+                                        <fmt:formatNumber 
+                                            value="${totalDiscount}" 
+                                            maxFractionDigits="0" 
+                                        /> VNĐ
+                                    </span>
                                 </div>
-                                <div class="d-flex justify-content-between mb-3">
+                                <!-- <div class="d-flex justify-content-between mb-3">
                                     <span class="text-muted">Shipping</span>
                                     <span>$5.00</span>
-                                </div>
+                                </div> -->
                                 <hr>
                                 <div class="d-flex justify-content-between mb-4">
-                                    <span class="fw-bold">Total</span>
-                                    <span class="fw-bold">$458.97</span>
+                                    <span class="fw-bold">Tổng cộng</span>
+                                    <span class="fw-bold">
+                                        <fmt:formatNumber 
+                                            value="${total}" 
+                                            maxFractionDigits="0" 
+                                        /> VNĐ
+                                    </span>
                                 </div>
 
                                 <!-- Promo Code -->
