@@ -85,7 +85,9 @@
                             <div class="d-flex justify-content-between">
                                 <span class="text-muted">0 VNĐ</span>
                                 <span class="fw-bold text-primary" id="priceValue">
-                                    500.000 VNĐ
+                                     <fmt:formatNumber 
+                                        value="${param.maxPrice != null ? param.maxPrice : 3000000}"
+                                    /> VNĐ
                                 </span>
                                 <span class="text-muted">3tr VNĐ</span>
                             </div>

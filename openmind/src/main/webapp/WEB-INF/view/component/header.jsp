@@ -23,10 +23,10 @@
             <div class="d-flex justify-content-between align-items-center">
 
             <!-- Logo -->
-            <div class="d-flex align-items-center">
+            <a class="d-flex align-items-center text-decoration-none" href="/">
                 <img src="<c:url value='/resources/images/logo/logo1.png'/>" alt="Logo" class="me-2">
                 <span class="fw-bold fs-5 d-none d-md-inline">OpenMind</span>
-            </div>
+            </a>
 
             <!-- Desktop Navigation -->
             <nav class="d-none d-md-flex">

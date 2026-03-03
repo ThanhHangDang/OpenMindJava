@@ -78,7 +78,7 @@ public class HomeController {
 
         for (CartItem item : cart) {
             if (item.getProductId().equals(productId)) {
-                item.setQuantity(item.getQuantity() + 1);
+                // item.setQuantity(item.getQuantity() + 1);
                 exists = true;
                 break;
             }
