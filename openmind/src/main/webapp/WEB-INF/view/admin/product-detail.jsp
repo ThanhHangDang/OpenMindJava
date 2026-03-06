@@ -24,8 +24,8 @@
         </head>
 
         <body>
-            <jsp:include page="./../component/header.jsp" />
             <div class="container py-5">
+                <a href="${pageContext.request.contextPath}/admin/products" class="btn btn-secondary mb-3">Back to Products</a>
                 <div class="row justify-content-center">
                     <!-- Product Images -->
                     <div class="col-md-3 mb-4">
@@ -98,39 +98,13 @@
                                     </select>
                             </div>
                         </div>
-
-                        <!-- Actions -->
-                        <div class="d-grid gap-2">
-                            <a class="btn btn-primary" type="submit"
-                                href="/add-to-cart?productId=${product.id}"
-                            >Add to Cart</a>
-                            <!-- <button class="btn btn-outline-secondary" type="button">
-                                    <i class="far fa-heart me-2"></i>Add to Wishlist
-                                </button> -->
-                        </div>
-
-                        <!-- Additional Info -->
-                        <div class="mt-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-truck text-primary me-2"></i>
-                                <span>Nhận được khoá học ngay sau 15 phút thanh toán</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-undo text-primary me-2"></i>
-                                <span>Đảm bảo quyền truy cập suốt đời</span>
-                            </div>
-                            <!-- <div class="d-flex align-items-center">
-                                <i class="fas fa-shield-alt text-primary me-2"></i>
-                                <span>2-year warranty</span>
-                            </div> -->
-                        </div>
                     </div>
                 </div>
 
                 <div class="row justify-content-center mt-2">
                     <div class="col-md-9">
                         <h3 class="h4 mb-3">Nội dung khoá học</h3>
-                        <p>${product.detail}</p>
+                        <p>${product.courseContent}</p>
                     </div>
                 </div>
 
@@ -155,7 +129,6 @@
                     </div>
                 </div>
             </div>
-            <jsp:include page="./../component/footer.jsp" />
         </body>
 
         </html>

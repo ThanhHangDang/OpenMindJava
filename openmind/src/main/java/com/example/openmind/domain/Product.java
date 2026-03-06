@@ -20,6 +20,10 @@ public class Product {
     private String detail;
     private int viewCount;
     private int discount;
+    private String courseRequired;
+    private String courseContent;
+    private String courseStep;
+    private String courseOutput;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -36,6 +40,38 @@ public class Product {
     public Long getId() {
         return id;
     }
+    public String getCourseRequired() {
+        return courseRequired;
+    }
+
+    public void setCourseRequired(String courseRequired) {
+        this.courseRequired = courseRequired;
+    }
+
+    public String getCourseContent() {
+        return courseContent;
+    }
+
+    public void setCourseContent(String courseContent) {
+        this.courseContent = courseContent;
+    }
+
+    public String getCourseStep() {
+        return courseStep;
+    }
+
+    public void setCourseStep(String courseStep) {
+        this.courseStep = courseStep;
+    }
+
+    public String getCourseOutput() {
+        return courseOutput;
+    }
+
+    public void setCourseOutput(String courseOutput) {
+        this.courseOutput = courseOutput;
+    }
+
     public int getViewCount() {
         return viewCount;
     }
