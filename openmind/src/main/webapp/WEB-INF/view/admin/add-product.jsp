@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý khoá học</title>
+    <link rel="icon" href="<c:url value='/resources/images/logo/logo_icon.jpg'/>" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -56,33 +57,23 @@
             <form:input path="courseContent" id="finalContent" type="hidden"/>
             
             <div class="mb-3">
-
                 <label class="form-label">Lộ trình bài học</label>
-
                 <div id="lesson-wrapper">
-
                     <div class="lesson border p-3 mb-3">
-
                         <input type="text" class="form-control lesson-title mb-2" placeholder="Tên lesson">
-
                         <input type="text" class="form-control step-input mb-2 ms-2" placeholder="Tiến trình nhỏ">
-
                         <button type="button" class="btn btn-sm btn-primary addStep">
                             + Thêm tiến trình
                         </button>
-
                         <button type="button" class="btn btn-sm btn-danger removeLesson">
                             Xoá lesson
                         </button>
-
                     </div>
-
                 </div>
 
                 <button type="button" class="btn btn-success mt-2" id="addLesson">
                     + Thêm lesson
                 </button>
-
             </div>
             <!-- input ẩn để gửi dữ liệu -->
             <form:input path="courseStep" id="finalLessonData" type="hidden"/>
@@ -100,19 +91,16 @@
                 <!-- <form:input path="imageUrl" class="form-control" type="file" /> -->
                 <form:input path="imageUrl" class="form-control" type="text" placeholder="Nhập URL ảnh sản phẩm"/>
             </div>
-            <button type="submit" class="btn btn-success">Thêm sản phẩm</button
+            <button type="submit" id="submitBtn" class="btn btn-success">Thêm sản phẩm</button>
         </form:form>
     </div>
 
-    <script>
+    <!-- <script>
 
         $(document).ready(function(){
-
             // thêm input
             $("#addContent").click(function () {
-
                 let lastInput = $(".content-input").last().val().trim();
-
                 if (lastInput === "") {
                     alert("Vui lòng không để trống nội dung trước khi thêm!");
                     return;
@@ -128,20 +116,16 @@
 
             // xoá input
             $(document).on("click", ".removeContent", function () {
-
                 if ($(".content-item").length > 0) {
                     $(this).closest(".content-item").remove();
                 } else {
                     alert("Phải có ít nhất 1 nội dung");
                 }
-
             });
 
             // submit form
             $("form").submit(function () {
-
                 let contents = [];
-
                 $(".content-input").each(function () {
 
                     let value = $(this).val().trim();
@@ -155,17 +139,13 @@
                 let result = contents.join("/00pizon16");
 
                 $("#finalContent").val(result);
-
             });
-
         });
-
     </script>
 
     <script>
 
         $(document).ready(function(){
-
             // thêm lesson
             $("#addLesson").click(function(){
 
@@ -186,36 +166,28 @@
 
                 </div>
                 `);
-
             });
 
             // thêm step
             $(document).on("click",".addStep",function(){
-
                 $(this).before(`
                 <input type="text" class="form-control step-input mb-2 ms-2" placeholder="Tiến trình nhỏ">
                 `);
-
             });
 
             // xoá lesson
             $(document).on("click",".removeLesson",function(){
-
                 if($(".lesson").length > 1){
                     $(this).closest(".lesson").remove();
                 }else{
                     alert("Phải có ít nhất 1 lesson");
                 }
-
             });
 
             // submit
             $("form").submit(function(){
-
                 let lessons = [];
-
                 $(".lesson").each(function(){
-
                     let title = $(this).find(".lesson-title").val().trim();
                     let steps = [];
 
@@ -226,27 +198,22 @@
                         if(value !== ""){
                             steps.push(value);
                         }
-
                     });
 
                     if(title !== "" && steps.length > 0){
-
                         let lessonData = title + "|" + steps.join("/000pizon17");
 
                         lessons.push(lessonData);
-
                     }
-
                 });
 
                 let result = lessons.join("/00pizon16");
 
                 $("#finalLessonData").val(result);
-
             });
-
         });
-
-    </script>
+    </script> -->
+    
+    <script defer src="<c:url value='/resources/js/add-product.js'/>"></script>
 </body>
 </html>

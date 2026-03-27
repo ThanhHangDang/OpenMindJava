@@ -64,4 +64,11 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 
+    @RequestMapping("/products/{id}/delete")
+    public String deleteProduct(@PathVariable Long id) {
+        this.productService.deleteProduct(id);
+        return "redirect:/admin/products";
+    }
+
+
 }

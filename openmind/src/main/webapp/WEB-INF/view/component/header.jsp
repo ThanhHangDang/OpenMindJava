@@ -24,7 +24,7 @@
 
             <!-- Logo -->
             <a class="d-flex align-items-center text-decoration-none" href="/">
-                <img src="<c:url value='/resources/images/logo/logo1.png'/>" alt="Logo" class="me-2">
+                <img src="<c:url value='/resources/images/logo/logo.jpg'/>" alt="Logo" class="me-2" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
                 <span class="fw-bold fs-5 d-none d-md-inline">OpenMind</span>
             </a>
 

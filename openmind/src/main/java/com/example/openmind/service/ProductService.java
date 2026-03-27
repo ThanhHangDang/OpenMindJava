@@ -46,4 +46,8 @@ public class ProductService {
     public Product findById(long id) {
         return this.productRepository.findById(id);
     }
+
+    public void deleteProduct(long id) {
+        this.productRepository.deleteById(id);
+    }
 }

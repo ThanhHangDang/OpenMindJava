@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý khoá học</title>
+    <link rel="icon" href="<c:url value='/resources/images/logo/logo_icon.jpg'/>" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -24,8 +25,9 @@
                     <th class="col-md-1">ID</th>
                     <th class="col-md-1">Ảnh</th>
                     <th class="col-md-4">Tên sản phẩm</th>
+                    <th class="col-md-2">Danh mục</th>
                     <th class="col-md-2">Giá</th>
-                    <th class="col-md-2">Giảm giá (%)</th>
+                    <th class="col-md-1">Giảm giá (%)</th>
                     <th class="col-md-2">Hành động</th>
                 </tr>
             </thead>
@@ -39,14 +41,22 @@
                                 ${product.productName}
                             </a>
                         </td>
+                        <td>${product.category.categoryName}</td>
                         
                         <td><fmt:formatNumber value="${product.price}" maxFractionDigits="0" /> VNĐ</td>
                         <td>${product.discount}</td>
                         <td>
                             <a href="${pageContext.request.contextPath}/admin/products/${product.id}/edit" class="btn btn-sm btn-warning">Sửa</a>
-                            <form action="${pageContext.request.contextPath}/admin/products/${product.id}/delete" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xóa</button>
-                            </form>
+                            
+                                <button  
+                                    class="btn btn-sm btn-danger" 
+                                    onclick=""
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal${product.id}"
+                                >
+                                    Xóa
+                                </button>
+                            
                         </td>
                     </tr>
                 </c:forEach>
@@ -99,6 +109,29 @@
                 </c:if>
             </ul>
         </nav>
+
+        <!-- Confirm modal -->
+        <c:forEach var="product" items="${products}">
+            <div class="modal fade" id="confirmDeleteModal${product.id}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel${product.id}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel${product.id}">Xác nhận xóa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn xóa khoá học "<strong>${product.productName}</strong>" không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <form action="${pageContext.request.contextPath}/admin/products/${product.id}/delete" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
 </body>
 </html>
